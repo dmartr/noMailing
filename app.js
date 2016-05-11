@@ -58,4 +58,30 @@ app.use(function(err, req, res, next) {
 });
 
 
+app.post('/user', function(request, response) {
+  
+  var u = req.body;
+
+  var newUser = new db.User({
+    name: u.name,
+    surname : u.surname,
+    email: u.email, 
+    DNI: u.DNI, 
+    PP: u.PP === 'on' ? true :false, 
+    PSOE: u.PSOE === 'on' ? true : false, 
+    Ciudadanos: u.Ciudadanos === 'on' ? true : false, 
+    Podemos: === u.Podemos 'on' ? true : false  
+  });
+
+  newUser.save(function(error, user) {
+
+    if (error) response.json(error);
+
+    response.redirect('/user');
+
+  }
+
+});
+
+
 module.exports = app;
